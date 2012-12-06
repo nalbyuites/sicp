@@ -1,0 +1,19 @@
+(define (new-if predicate then-clause else-clause)
+  (cond (predicate then-clause)
+        (else else-clause)))
+
+Using the above definition of new-if, the square root-program evaluates as follows:
+
+>
+(new-if (good-enough? guess x)
+        guess
+        (sqrt-iter (improve guess x)
+                   x))
+>
+(cond ((good-enough? guess x) guess)
+      (else x)
+      guess
+      (sqrt-iter (improve guess x)
+                 x))
+
+We see that new-if returns the arguments of good-enough? for its then and else clauses. If's earlier then and else clauses are also both evaluated!

@@ -1,0 +1,4 @@
+(define (a-plus-abs-b a b)
+  ((if (> b 0) + -) a b))
+
+In the procedure a-plus-abs-b, the if conditional checks if 'b' is postive. If 'b' is positive, the built-in procedure '+' is applied to 'a' and 'b', otherwise '-' is applied to and 'b'. Thus, it is giving us the sum of 'a' and the absolute value of 'b'.

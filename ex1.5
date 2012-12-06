@@ -1,0 +1,18 @@
+(define (p) (p))
+(define (test x y)
+  (if (= x 0) 0 y))
+
+Evaluated s-exp: (test 0 (p))
+
+In case of applicative-order evaluation:
+(test 0 (p))
+> (if (= 0 0) 0 (p))  # We replace x and y as defined in 'test' earlier.
+> (if #t 0 (p))       # We immediately evaluate the procedure '=', 0 evalutes to 0. In the body of the procedure 'p', the procedure 'p' is again encountered, returned as-is as the value of 'p'.
+> 0                   # Since the condition was true, 0 is returned as value of 'test'.
+
+In case of normal-order evaluation:
+(test 0 (p))
+> (if (= 0 0) 0 (p))  # The substitutions are same as in applicative-order evaluation initially.
+> (if (= 0 0) 0 (p))  # The '=' procedure is not evaluated, until procedure 'p' provides a procedure that can be further evaluated. 'p' returns (p).
+> (if (= 0 0) 0 (p))  # The evaluation process is stuck now, since the procedure 'p' does not eventually break down into primitive expressions and procedures.
+
